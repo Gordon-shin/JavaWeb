@@ -1,4 +1,4 @@
-package aaa;
+package org.sc.servlet;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,16 +8,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class LoginServlet
+ * Servlet implementation class UpdateAvatarServlet
  */
-@WebServlet("/LoginServlet")
-public class LoginServlet extends HttpServlet {
+@WebServlet("/UpdateAvatarServlet")
+public class UpdateAvatarServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+       
     /**
-     * Default constructor. 
+     * @see HttpServlet#HttpServlet()
      */
-    public LoginServlet() {
+    public UpdateAvatarServlet() {
+        super();
         // TODO Auto-generated constructor stub
     }
 

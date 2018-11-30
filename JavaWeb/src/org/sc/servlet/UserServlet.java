@@ -1,4 +1,4 @@
-package aaa;
+package org.sc.servlet;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,17 +7,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.sc.bean.User;
+import org.sc.dao.UserDao;
+
 /**
- * Servlet implementation class RegisterServlet
+ * Servlet implementation class UserServlet
  */
-@WebServlet("/RegisterServlet")
-public class RegisterServlet extends HttpServlet {
+@WebServlet("/UserServlet")
+public class UserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RegisterServlet() {
+    public UserServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,11 +29,16 @@ public class RegisterServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		
-		String username = request.getParameter("username");
-		String password = request.getParameter("password");
-		
+		String stuId = request.getParameter("stuId");
+		User profiledUser = (User)request.getSession().getAttribute("User");
+		if (stuId != null && !"".equals(stuId)) {
+			UserDao userDao = new UserDao();
+			User user = userDao.query(stuId);
+			if (user != null) {
+				profiledUser = user;
+			}
+		}
+		request.setAttribute("profiledUser", profiledUser);
 	}
 
 	/**
