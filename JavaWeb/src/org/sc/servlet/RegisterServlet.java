@@ -55,7 +55,7 @@ public class RegisterServlet extends HttpServlet {
 		String gender = request.getParameter("gender");
 		String bio = request.getParameter("bio");
 		String gitUrl = request.getParameter("gitUrl");
-		
+		Boolean b;
 		Part part = request.getPart("avatar");
 		String fileName = part.getSubmittedFileName();
 		String avatar = "";
@@ -63,7 +63,7 @@ public class RegisterServlet extends HttpServlet {
 			String newFileName = UUID.randomUUID().toString() + "_" + fileName;
 			String filePath = getServletContext().getRealPath("/img/upload");
 			File f = new File(filePath);
-			if (!f.exists()) {
+			if (!(b=f.exists())) {
 				f.mkdirs();
 			}
 			System.out.println(filePath);

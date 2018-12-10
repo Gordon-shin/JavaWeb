@@ -1,16 +1,29 @@
 package org.sc.servlet;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.UUID;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.annotation.MultipartConfig;
+
+import javax.servlet.http.Part;
+
+import org.sc.bean.User;
+import org.sc.dao.UserDao;
+
+import java.io.File;
+
 
 /**
  * Servlet implementation class UpdateAvatarServlet
  */
 @WebServlet("/UpdateAvatarServlet")
+@MultipartConfig
 public class UpdateAvatarServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -35,7 +48,31 @@ public class UpdateAvatarServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		Boolean b;
+		Part part = request.getPart("avatar");
+		String fileName = part.getSubmittedFileName();
+		String stuId=((User)request.getSession().getAttribute("User")).getStuId();
+		String avatar = "";
+		if (fileName != null && !"".equals(fileName)) {
+			String newFileName = UUID.randomUUID().toString() + "_" + fileName;
+			String filePath = getServletContext().getRealPath("/img/upload");
+			File f = new File(filePath);
+			if (!(b=f.exists())) {
+				f.mkdirs();
+			}
+			System.out.println(filePath);
+			part.write(filePath + "/" + newFileName);
+			System.out.println(newFileName);
+			avatar = newFileName;
+		}
+		UserDao userDao = new UserDao();
+		User user = new User();
+		user.setAvatar(avatar);
+		user.setStuId(stuId);
+		Boolean c;
+		c=userDao.updateimg(user);
+
+		
 	}
 
 }
