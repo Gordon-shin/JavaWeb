@@ -10,26 +10,38 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <script type="text/javascript" src="./js/jquery-3.3.1.js"></script>  
+  <script>
+	var json;
+	</script>
+    <script type="text/javascript" src="./js/jquery-3.3.1.js">
+	
+    </script>  
   
    	<script type="text/javascript" >
  			function a(){
 				alert("a");	
 			}
  			function b(){
- 				$.getJSON(
+ 				$.ajaxSetup({ 
+ 				    async : false  //关闭异步传输
+ 				});  
+ 				var result
+ 				 $.getJSON(
  				"GenderCountServlet",
- 				{"s":"f"},
- 				function (result){
- 					var fn = result.keyf;
- 					var mn = result.keym; 
-					alert(fn);
-					alert(mn);
- 				}
-
+ //				{"s":null} json格式数据
+ 				null,
+ 				function (data){
+					result = data;
+ 					
+ 				}	
  				);
+ 				return result;
+ 				
  			}
+   	json = b();
+ 			
 	 </script>
+  
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -48,7 +60,7 @@
   </head>
   
 
-  <body onload="b()">
+  <body >
 
  
       <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
@@ -115,50 +127,26 @@
     <!-- Icons -->
     <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
     <script>
-      feather.replace()
-      
+   
+      feather.replace()    
     </script>
 
     <!-- Graphs -->
+     <script type="text/javascript" src="./js/jquery-3.3.1.js"></script>  
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
-    <script>
    
-<%--     <%  --%>
-//      String fnumber ="1";
-//      String mnumber ="2";
-    
-//     UserCount usercount = new UserCount();
-//    	GenderCountDao gendercount = new GenderCountDao();
-   	
-//        List <UserCount> usercounts =  gendercount.queryGenderNubmer();
-//                // cc= (usercounts.get(0).getGender()).equals(("w".toString()));
-//                 String x=usercounts.get(0).getGender();
-//                 System.out.println(x);
-//        for (int i = 0; i < usercounts.size(); i++) {
-//            if((usercounts.get(i).getGender()).equals("f"))
-//            {
-//            	fnumber = usercounts.get(i).getCount();
-//             System.out.println(fnumber);
-//            }
-//            else if((usercounts.get(i).getGender()).equals("m")){
-//            	mnumber = usercounts.get(i).getCount();
-//            	System.out.println(mnumber);
-           	
-//         }  
-           
-//        }
-       
-<%--        %> --%>
 	
+ 
+    <script>
+
       var ctx = document.getElementById("myChart");
-      var keym = "1";
-      var keyf = "2";
+
       var myChart = new Chart(ctx, {
         type: 'line',
         data: {
           labels: ["男", "女"],
           datasets: [{
-            data: [1,2],
+            data: [json.keym,json.keyf],
 
             lineTension: 0,
             backgroundColor: 'transparent',
