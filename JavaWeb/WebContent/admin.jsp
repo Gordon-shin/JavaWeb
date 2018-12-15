@@ -1,0 +1,185 @@
+<%@page import="org.apache.tomcat.util.descriptor.tld.TldRuleSet.Variable"%>
+<%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+ <%@page import="org.sc.dao.GenderCountDao"%>
+<%@page import="java.util.List"%>
+<%@page import="org.sc.bean.UserCount"%>
+<%@page import="org.sc.servlet.GenderCountServlet"%>
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <script type="text/javascript" src="./js/jquery-3.3.1.js"></script>  
+  
+   	<script type="text/javascript" >
+ 			function a(){
+				alert("a");	
+			}
+ 			function b(){
+ 				$.getJSON(
+ 				"GenderCountServlet",
+ 				{"s":"f"},
+ 				function (result){
+ 					var fn = result.keyf;
+ 					var mn = result.keym; 
+					alert(fn);
+					alert(mn);
+ 				}
+
+ 				);
+ 			}
+	 </script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="./img/favicon.ico">
+
+    <title>后台管理系统</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="./css/admin.css" rel="stylesheet">
+
+	
+  </head>
+  
+
+  <body onload="b()">
+
+ 
+      <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">后台管理系统</a>
+      <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+      <ul class="navbar-nav px-3">
+        <li class="nav-item text-nowrap">
+          <a class="nav-link" href="#">Sign out</a>
+        </li>
+      </ul>
+    </nav>
+
+
+    <div class="container-fluid">
+      <div class="row">
+        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+          <div class="sidebar-sticky" id="myTab">
+            <ul class="nav flex-column" >
+              <li class="nav-item">
+                <a class="nav-link active" href="#" data-toggle="tab">
+                  <span data-feather="home"></span>
+                  Dashboard <span class="sr-only">(current)</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link " href="#" data-toggle="tab">
+                  <span data-feather="users"></span>
+                  Users
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#" data-toggle="tab">
+                  <span data-feather="file"></span>
+                  Posts
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#" data-toggle="tab">
+                  <span data-feather="message-circle"></span>
+                  Comments
+                </a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <h1 class="h2">Dashboard</h1>
+          </div>
+
+          <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
+        </main>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    <script src="./js/popper.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+
+    <!-- Icons -->
+    <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+    <script>
+      feather.replace()
+      
+    </script>
+
+    <!-- Graphs -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+    <script>
+   
+<%--     <%  --%>
+//      String fnumber ="1";
+//      String mnumber ="2";
+    
+//     UserCount usercount = new UserCount();
+//    	GenderCountDao gendercount = new GenderCountDao();
+   	
+//        List <UserCount> usercounts =  gendercount.queryGenderNubmer();
+//                // cc= (usercounts.get(0).getGender()).equals(("w".toString()));
+//                 String x=usercounts.get(0).getGender();
+//                 System.out.println(x);
+//        for (int i = 0; i < usercounts.size(); i++) {
+//            if((usercounts.get(i).getGender()).equals("f"))
+//            {
+//            	fnumber = usercounts.get(i).getCount();
+//             System.out.println(fnumber);
+//            }
+//            else if((usercounts.get(i).getGender()).equals("m")){
+//            	mnumber = usercounts.get(i).getCount();
+//            	System.out.println(mnumber);
+           	
+//         }  
+           
+//        }
+       
+<%--        %> --%>
+	
+      var ctx = document.getElementById("myChart");
+      var keym = "1";
+      var keyf = "2";
+      var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: ["男", "女"],
+          datasets: [{
+            data: [1,2],
+
+            lineTension: 0,
+            backgroundColor: 'transparent',
+            borderColor: '#007bff',
+            borderWidth: 4,
+            pointBackgroundColor: '#007bff'
+          }]
+        },
+        options: {
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero: false
+              }
+            }]
+          },
+          legend: {
+            display: false,
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

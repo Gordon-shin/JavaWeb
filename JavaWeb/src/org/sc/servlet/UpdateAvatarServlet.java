@@ -82,10 +82,11 @@ public class UpdateAvatarServlet extends HttpServlet {
 		Boolean c;
 		c=userDao.updateimg(user);
 		if (true) {
-			//request.setAttribute("tip", "UpdateImages successfully, logining automatically.");
+			request.setAttribute("tip", "UpdateImages successfully, logining automatically.");
 			HttpSession session = request.getSession(true);
 			session.setAttribute("User", user);
-			request.getRequestDispatcher("result2.jsp").forward(request, response);
+	//		request.getRequestDispatcher("result2.jsp").forward(request, response);
+			response.sendRedirect("userprofile.jsp");
 
 		}
 		
