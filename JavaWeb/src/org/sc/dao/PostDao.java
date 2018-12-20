@@ -6,7 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.sc.bean.Post;
+import org.sc.bean.PostCount;
 import org.sc.bean.User;
+import org.sc.bean.UserCount;
 import org.sc.util.DBUtil;
 
 import java.util.ArrayList;
@@ -15,7 +17,7 @@ import java.util.List;
 public class PostDao {
 	public boolean create(Post post) {
 		Connection connection = DBUtil.getConnection();
-		String sql = "INSERT INTO tb_posts(author, title, content) VALUES(?,?,?)";
+		String sql = "INSERT INTO tb_posts(author, title, content,posttime) VALUES(?,?,?,?)";
 		PreparedStatement pStatement = null;
 		int result = 0;
 		try {
@@ -23,6 +25,9 @@ public class PostDao {
 			pStatement.setString(1, post.getAuthor());
 			pStatement.setString(2, post.getTitle());
 			pStatement.setString(3, post.getContent());
+			pStatement.setString(4, post.getPosttime().toString());
+
+			
 			result = pStatement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -263,5 +268,31 @@ public class PostDao {
 			DBUtil.closeJDBC(null, pStatement, connection);
 		}
 		return count;
+	}
+	public List<PostCount> queryPostCounts(){
+		Connection connection = DBUtil.getConnection();
+		String sql = "select author,count(*) from tb_posts group by author";
+		PreparedStatement pStatement = null;
+		ResultSet rs = null;
+		List<PostCount> postcounts = new ArrayList<PostCount> ();
+		try {
+			pStatement = connection.prepareStatement(sql);
+//			pStatement.setInt(1, postId);
+			rs = pStatement.executeQuery();
+			
+			while(rs.next()) {
+				PostCount postcount = new PostCount();
+				postcount.setAuthor(rs.getString(1));
+				postcount.setCount(rs.getString(2));
+				postcounts.add(postcount);
+			
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.closeJDBC(rs, pStatement, connection);
+		}
+		
+		return postcounts ;		
 	}
 }

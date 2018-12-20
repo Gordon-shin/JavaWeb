@@ -43,6 +43,7 @@
 			<jsp:param name="postid" value="${param.postid }" />
 		</jsp:include>
 		
+		
 		<%@ include file="./components/post-content.jsp" %>
 		<%@ include file="./components/post-comments.jsp" %>
 	  </main>

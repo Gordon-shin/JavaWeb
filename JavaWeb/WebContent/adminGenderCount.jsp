@@ -60,7 +60,7 @@
   </head>
   
 
-  <body >
+  <body>
 
  
       <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
@@ -80,25 +80,25 @@
           <div class="sidebar-sticky" id="myTab">
             <ul class="nav flex-column" >
               <li class="nav-item">
-                <a class="nav-link active" href="admin.jsp" >
+                <a class="nav-link " href="admin.jsp">
                   <span data-feather="home"></span>
-                  Dashboard <span class="sr-only">(current)</span>
+                  Dashboard <span class="sr-only"></span>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link " href="adminGenderCount.jsp" >
-                  <span data-feather="users"></span>
+                <a class="nav-link active" href="adminGenderCount.jsp" data-toggle="tab">
+                  <span data-feather="users" href="adminGenderCount.jsp">(current)</span>
                   Users
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="adminPost.jsp" >
+                <a class="nav-link" href="adminPost.jsp">
                   <span data-feather="file"></span>
                   Posts
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="adminPost.jsp">
+                <a class="nav-link" href="adminComments.jsp" >
                   <span data-feather="message-circle"></span>
                   Comments
                 </a>

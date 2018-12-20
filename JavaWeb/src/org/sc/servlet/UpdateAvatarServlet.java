@@ -3,7 +3,9 @@ package org.sc.servlet;
 
 
 import java.io.File;
+
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.UUID;
 
 import javax.servlet.ServletException;
@@ -16,6 +18,7 @@ import javax.servlet.annotation.MultipartConfig;
 
 import javax.servlet.http.Part;
 
+import org.apache.jasper.tagplugins.jstl.core.Out;
 import org.sc.bean.User;
 import org.sc.dao.UserDao;
 
@@ -72,23 +75,50 @@ public class UpdateAvatarServlet extends HttpServlet {
 			System.out.println(newFileName);
 			avatar = newFileName;
 		}
-		
+
 		UserDao userDao = new UserDao();
 		User user = new User();
 		user.setPassword(password);
 		user.setStuName(stuName);
 		user.setAvatar(avatar);
 		user.setStuId(stuId);
-		Boolean c;
-		c=userDao.updateimg(user);
-		if (true) {
-			request.setAttribute("tip", "UpdateImages successfully, logining automatically.");
+		Boolean result;
+		result=userDao.updateimg(user);
+		
+		if (result) {
+		response.setContentType("text/html;charset=utf-8");
+
+		HttpSession session = request.getSession(true);
+		session.setAttribute("User", user);
+		PrintWriter out = response.getWriter();
+	//	response.sendRedirect("userprofile.jsp");
+		out.println ("<script language=javascript>alert('头像修改成功！');window.location.href='userprofile.jsp';</script>");
+		}
+		else {
+			response.setContentType("text/html;charset=utf-8");
 			HttpSession session = request.getSession(true);
 			session.setAttribute("User", user);
-	//		request.getRequestDispatcher("result2.jsp").forward(request, response);
-			response.sendRedirect("userprofile.jsp");
-
+			PrintWriter out = response.getWriter();
+			out.println ("<script language=javascript>alert('头像修改失败');window.location.href='userprofile.jsp';</script>");
+			
 		}
+		
+	
+		
+		
+		
+//		
+//		if (true) {
+//			request.setAttribute("tip", "UpdateImages successfully, logining automatically.");
+//			HttpSession session = request.getSession(true);
+//			session.setAttribute("User", user);
+//	//		request.getRequestDispatcher("result2.jsp").forward(request, response);
+//			PrintWriter out = response.getWriter();
+//	//		out.print("<script> alert(\"修改头像成功!\"); </script>");
+//			response.sendRedirect("userprofile.jsp");
+//			
+//
+//		}
 		
 	}
 

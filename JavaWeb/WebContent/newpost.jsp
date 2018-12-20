@@ -17,6 +17,7 @@
     <!-- Custom styles for this template -->
 <!--     <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet"> -->
     <link href="./css/blog.css" rel="stylesheet">
+
   </head>
 
   <body>
@@ -60,6 +61,7 @@
                         <div class="row">
                             <div class="offset-sm-2 col-sm-10">
                                 <button class="btn btn-lg btn-primary" type="submit">Commit</button>
+                                <button class="btn btn-lg btn-primary" >image</button>
                                 <a class="btn btn-lg btn-secondary" onclick="javascript:history.go(-1);">Cancel</a>
                             </div>
                         </div>

@@ -27,7 +27,7 @@
  				});  
  				var result
  				 $.getJSON(
- 				"GenderCountServlet",
+ 				"adminPostServlet",
  //				{"s":null} json格式数据
  				null,
  				function (data){
@@ -39,7 +39,7 @@
  				
  			}
    	json = b();
- 			
+		
 	 </script>
   
     <meta charset="utf-8">
@@ -80,25 +80,25 @@
           <div class="sidebar-sticky" id="myTab">
             <ul class="nav flex-column" >
               <li class="nav-item">
-                <a class="nav-link active" href="admin.jsp" >
+                <a class="nav-link " href="admin.jsp" >
                   <span data-feather="home"></span>
-                  Dashboard <span class="sr-only">(current)</span>
+                  Dashboard <span class="sr-only"></span>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link " href="adminGenderCount.jsp" >
-                  <span data-feather="users"></span>
+                <a class="nav-link" href="adminGenderCount.jsp" >
+                  <span data-feather="users" >(current)</span>
                   Users
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="adminPost.jsp" >
+                <a class="nav-link active" href="adminPost.jsp" >
                   <span data-feather="file"></span>
                   Posts
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="adminPost.jsp">
+                <a class="nav-link" href="adminComments.jsp" >
                   <span data-feather="message-circle"></span>
                   Comments
                 </a>
@@ -144,9 +144,9 @@
       var myChart = new Chart(ctx, {
         type: 'line',
         data: {
-          labels: ["男", "女"],
+          labels: json.author,
           datasets: [{
-            data: [json.keym,json.keyf],
+            data: json.count,
 
             lineTension: 0,
             backgroundColor: 'transparent',
