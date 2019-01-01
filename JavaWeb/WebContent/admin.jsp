@@ -142,14 +142,14 @@
       var ctx = document.getElementById("myChart");
 
       var myChart = new Chart(ctx, {
-        type: 'line',
+        type: 'bar',
         data: {
           labels: ["男", "女"],
           datasets: [{
             data: [json.keym,json.keyf],
 
             lineTension: 0,
-            backgroundColor: 'transparent',
+            backgroundColor: '#007bff',
             borderColor: '#007bff',
             borderWidth: 4,
             pointBackgroundColor: '#007bff'
@@ -159,7 +159,7 @@
           scales: {
             yAxes: [{
               ticks: {
-                beginAtZero: false
+                beginAtZero: true
               }
             }]
           },

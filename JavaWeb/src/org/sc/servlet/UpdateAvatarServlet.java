@@ -87,7 +87,6 @@ public class UpdateAvatarServlet extends HttpServlet {
 		
 		if (result) {
 		response.setContentType("text/html;charset=utf-8");
-
 		HttpSession session = request.getSession(true);
 		session.setAttribute("User", user);
 		PrintWriter out = response.getWriter();
